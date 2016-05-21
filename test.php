@@ -1,11 +1,16 @@
 <?php
 
-function tata($argv){
+function read_files($argv){
 
-    foreach (glob("*") as $file) {
-        if ($file == '.' || $file == '..') continue;
-        print $file;
+    if ($handle = opendir($argv)) {
+        while (false !== ($file = readdir($handle))) {
+            if ($file == '.' || $file == '..') continue;
+            print $file . "\n";
+            if (is_dir($argv ."/" .$file)){
+                read_files($argv ."/" .$file);
+            }
+        }
     }
 }
 
-tata($argv);
+read_files($argv[1]);
