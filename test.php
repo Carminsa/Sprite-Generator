@@ -1,7 +1,12 @@
 <?php
 
-$toto = mime_content_type('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder');
-echo $toto;
+function test($argv)
+{
 
+    list($width, $height) = getimagesize($argv[1]);
+    echo "width: " . $width;
+    echo "height: " . $height;
 
-conten
+}
+
+test($argv[1]);
