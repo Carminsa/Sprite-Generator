@@ -1,14 +1,10 @@
 <?php
 
-function read_files($folder)
-{
+function read_files($folder){
 
     if ($handle = opendir($folder)) {
         while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;
-
-
-
             if (is_dir($folder . "/" . $file)) {
                 read_files($folder . "/" . $file);
             }
@@ -17,6 +13,7 @@ function read_files($folder)
                 $toto = (list($width, $height) = getimagesize($folder . "/" . $file));
                 $tata = array_merge($tab, $toto);
                 print_r($tata);
+                $lol=get_png($tata,$folder, $handle);
             }
         }
     }
@@ -25,35 +22,16 @@ function read_files($folder)
 read_files($argv[1]);
 
 
+function get_png($folder, $tata, $handle ){
+    
+    $test=imagecreatetruecolor(2308, 1899);
+    $image_1 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/Small-mario.png');
+    $image_2 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
 
+    imagealphablending($test, true);
+    imagesavealpha($test, true);
+    imagecopy($test, $image_1, 0, 0, 0, 0, 1473, 1854);
+    imagecopy($test, $image_2, 1474, 0, 0, 0, 1000, 1000);
+    imagepng($test, 'image_3.png');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                $tata=get_png($tab, $handle);
-//function get_png($tab, $handle){
-//
-//    list($width, $height) = getimagesize($tab);
-//    echo "width: " . $width . "\n";
-//    echo "height: " .  $height;
-
-//    $size=getimagesize('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder', $tab);
-// print_r($tab);
-//}
+}

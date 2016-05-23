@@ -1,38 +1,41 @@
 <?php
 
-function read_files($folder)
-{
 
-    if ($handle = opendir($folder)) {
-        while (false !== ($file = readdir($handle))) {
-            if ($file == '.' || $file == '..') continue;
-            if (strrpos($file, '.png')) {
-
-                $tab = explode("\n", $file);
-                $toto = (list($width, $height) = getimagesize($folder . "/" . $file));
-                $tata = array_merge($tab, $toto);
+//$image = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/Small-mario.png');
+//$frame = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
+//
+//imagecopymerge($image, $frame, 50, 10, 100, 100, 100, 100, 100);
+//
+//# Save the image to a file
+//imagepng($image,'/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/fsdfsdfsd.png');
 
 
-                if (is_dir($folder . "/" . $file)) {
-                    read_files($folder . "/" . $file);
-                }
-                if (!strrpos($file, '.png')) {
-                    print_r($tata);
-                }
-            }
-        }
-    }
-}
+$test=imagecreatetruecolor(2308, 1899);
+$image_1 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/Small-mario.png');
+$image_2 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
 
-    read_files($argv[1]);
+imagealphablending($test, true);
+imagesavealpha($test, true);
+imagecopy($test, $image_1, 0, 0, 0, 0, 1473, 1854);
+imagecopy($test, $image_2, 1474, 0, 0, 0, 1000, 1000);
+imagepng($test, 'image_3.png');
 
 
 
 
 
+//$src=imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
+//imagepng("/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png");
 
 
 
 
 
-
+//$dest = imagecreatetruecolor(80, 40);
+//imagecopy($src,$dest ,0 ,0 ,20 ,13 ,80 ,40);
+//
+//header('Content-Type: image/png');
+//imagepng($dest);
+//
+//imagedestroy($dest);
+//imagedestroy($src);
