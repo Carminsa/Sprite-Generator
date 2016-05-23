@@ -1,12 +1,33 @@
 <?php
 
-function test($argv)
+function read_files($folder)
 {
 
-    list($width, $height) = getimagesize($argv[1]);
-    echo "width: " . $width;
-    echo "height: " . $height;
+    if ($handle = opendir($folder)) {
+        while (false !== ($file = readdir($handle))) {
+            if ($file == '.' || $file == '..') continue;
 
+
+
+            if (is_dir($folder . "/" . $file)) {
+                read_files($folder . "/" . $file);
+            }
+            if (strrpos($file, '.png')) {
+                $tab = explode("\n", $file);
+                $toto = (list($width, $height) = getimagesize($folder . "/" . $file));
+                $tata = array_merge($tab, $toto);
+                print_r($tata);
+            }
+        }
+    }
 }
 
-test($argv[1]);
+read_files($argv[1]);
+
+
+
+
+
+
+
+

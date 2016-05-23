@@ -1,15 +1,38 @@
 <?php
 
-function tata($argc=null, $argv=NULL){
+function read_files($folder)
+{
 
-    if($argc>1){
-        foreach (glob('*') as $file) {
+    if ($handle = opendir($folder)) {
+        while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;
-            print $file . "\n";
+            if (strrpos($file, '.png')) {
+
+                $tab = explode("\n", $file);
+                $toto = (list($width, $height) = getimagesize($folder . "/" . $file));
+                $tata = array_merge($tab, $toto);
+
+
+                if (is_dir($folder . "/" . $file)) {
+                    read_files($folder . "/" . $file);
+                }
+                if (!strrpos($file, '.png')) {
+                    print_r($tata);
+                }
+            }
         }
     }
-    else
-        return false;
 }
 
-var_dump(tata($argc, $argv));
+    read_files($argv[1]);
+
+
+
+
+
+
+
+
+
+
+

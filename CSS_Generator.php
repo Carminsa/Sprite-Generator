@@ -1,29 +1,53 @@
 <?php
 
-
-function read_files($folder){
+function read_files($folder)
+{
 
     if ($handle = opendir($folder)) {
         while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;
-            if (strrpos($file,'.png')) {
+
+
+
+            if (is_dir($folder . "/" . $file)) {
+                read_files($folder . "/" . $file);
+            }
+            if (strrpos($file, '.png')) {
                 $tab = explode("\n", $file);
-                $toto=(list($width, $height) = getimagesize($folder . "/" . $file));
-                $tata=array_merge($tab,$toto);
+                $toto = (list($width, $height) = getimagesize($folder . "/" . $file));
+                $tata = array_merge($tab, $toto);
                 print_r($tata);
-
-
-
-                if (is_dir($folder . "/" . $file)) {
-                    read_files($folder . "/" . $file);
-                }
-//                $tata=get_png($tab, $handle);
             }
         }
     }
 }
+
 read_files($argv[1]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                $tata=get_png($tab, $handle);
 //function get_png($tab, $handle){
 //
 //    list($width, $height) = getimagesize($tab);
