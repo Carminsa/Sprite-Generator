@@ -1,106 +1,30 @@
 <?php
 
-function read_files($argv){
+global $file;
 
-    
-    if ($handle = opendir($argv)) {
+function read_files($folder){
+
+    if ($handle = opendir($folder)) {
         while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;
-            print $file ."\n";
+            if (strrpos($file,'.png')) {
+//                print $file. "\n";
+                if (is_dir($folder . "/" . $file)) {
+                    read_files($folder . "/" . $file);
+                }
+            }
         }
-    } elseif (file_exists($handle)){
-        recursive();
-    }
-}
-function recursive(){
-
-    foreach (glob("*") as $file) {
-        if($file == '.' || $file == '..') continue;
-        print $file . '<br>';
     }
 }
 
 read_files($argv[1]);
 
+function get_png($file){
 
+    var_dump($file);
+}
 
+get_png($file);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-***************************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-
-function read_files($argv)
-{
-
-    if ($handle = opendir($argv)) {
-        while (false !== ($file = readdir($handle))) {
-            if ($file == '.' || $file == '..') continue;
-            print $file . "\n";
-            var_dump(is_file($hadnle));
-        }
-        if (is_dir($file)) {
-            echo "tata";
-
-
-read_files($argv[1]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+//  $png = image_type_to_mime_type(IMAGETYPE_PNG);
+//  var_dump($png);

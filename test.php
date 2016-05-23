@@ -1,16 +1,7 @@
 <?php
 
-function read_files($argv){
+$toto = mime_content_type('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder');
+echo $toto;
 
-    if ($handle = opendir($argv)) {
-        while (false !== ($file = readdir($handle))) {
-            if ($file == '.' || $file == '..') continue;
-            print $file . "\n";
-            if (is_dir($argv ."/" .$file)){
-                read_files($argv ."/" .$file);
-            }
-        }
-    }
-}
 
-read_files($argv[1]);
+conten
