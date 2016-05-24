@@ -1,7 +1,7 @@
 <?php
 
 
-function read_files($folder, &$tab=array()){
+function read_files($folder){
 
     if ($handle = opendir($folder)) {
         $sprite = imagecreatetruecolor(3500, 1899);
@@ -18,7 +18,6 @@ function read_files($folder, &$tab=array()){
                 $image_size = getimagesize($folder . "/" . $file);
                 $tab = array_merge($tab_name, $image_size);
                 get_png($sprite, $tab, $folder, $handle, $file, $image_size, $tab_name);
-                var_dump($tab);
             }
         }
     }
@@ -35,10 +34,10 @@ function get_png(&$sprite, $tata, $folder, $file, $tab, $toto, $handle){
     static $largerX = 0;
     $kiki = $folder . "/" . $tab;
 
-
     $image_1 = imagecreatefrompng($kiki);
 
     imagecopy($sprite, $image_1, $largerX, 0, 0, 0, $toto[0], $toto[1]);
+    var_dump($toto);
     $largerX += $toto[0];
 
 }
