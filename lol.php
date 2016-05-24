@@ -1,41 +1,46 @@
 <?php
 
 
-//$image = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/Small-mario.png');
-//$frame = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
-//
-//imagecopymerge($image, $frame, 50, 10, 100, 100, 100, 100, 100);
-//
-//# Save the image to a file
-//imagepng($image,'/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/fsdfsdfsd.png');
+function read_files($folder, &$tab=array()){
+
+    if ($handle = opendir($folder)) {
+        $sprite = imagecreatetruecolor(3500, 1899);
+
+        while (false !== ($file = readdir($handle))) {
+            if ($file == '.' || $file == '..') continue;
+            if (is_dir($folder . "/" . $file)) {
+                recursive($folder . "/" . $file);
+            }
+            if (strrpos($file, '.png')) {
+                $tab = getimagesize($folder . "/" . $file);
+//                print_r($tab);
+            }
+        }
+    }
+    imagepng($sprite, 'image_3.png');
+}
+
+read_files($argv[1]);
+
+function recursive($folder){
+
+    if ($handle = opendir($folder)) {
+        read_files($folder);
+    }
+
+}
 
 
-$test=imagecreatetruecolor(2308, 1899);
-$image_1 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/Small-mario.png');
-$image_2 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
-
-imagealphablending($test, true);
-imagesavealpha($test, true);
-imagecopy($test, $image_1, 0, 0, 0, 0, 1473, 1854);
-imagecopy($test, $image_2, 1474, 0, 0, 0, 1000, 1000);
-imagepng($test, 'image_3.png');
+function sprite(&$sprite){
 
 
+    static $largerX = 0;
+    $kiki = $folder . "/" . $tab;
 
 
+    $image_1 = imagecreatefrompng($kiki);
 
-//$src=imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
-//imagepng("/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png");
-
-
-
-
-
-//$dest = imagecreatetruecolor(80, 40);
-//imagecopy($src,$dest ,0 ,0 ,20 ,13 ,80 ,40);
-//
-//header('Content-Type: image/png');
-//imagepng($dest);
-//
-//imagedestroy($dest);
-//imagedestroy($src);
+    imagecopy($sprite, $image_1, $largerX, 0, 0, 0, $toto[0], $toto[1]);
+    $largerX += $toto[0];
+    
+}

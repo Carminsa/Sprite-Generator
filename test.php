@@ -1,11 +1,34 @@
 <?php
 
-$test=imagestring('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/Small-mario.png', 1, 12,4 ,'peut' ,$red );
+
+function hello($hi=null){
+    $hi="hello word";
+    double($hi);
+}
+hello();
+
+
+function double($hi=null){
+    echo $hi ;
+
+}
+double();
 
 
 
 
-//  imagealphablending($test, true);
-//  imagesavealpha($test, true);
+<?php
 
 
+function hello($hi=null){
+    $hi="hello word";
+    return $hi;
+}
+hello();
+
+
+function double($hi=null){
+    echo hello($hi);
+
+}
+double();
