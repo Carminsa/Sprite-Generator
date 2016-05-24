@@ -3,6 +3,8 @@
 function read_files($folder){
 
     if ($handle = opendir($folder)) {
+        $sprite = imagecreatetruecolor(3500, 1899);
+
         while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;
             if (is_dir($folder . "/" . $file)) {
@@ -10,34 +12,28 @@ function read_files($folder){
             }
             if (strrpos($file, '.png')) {
                 $tab = explode("\n", $file);
-                $toto = (list($width, $height) = getimagesize($folder . "/" . $file));
+                $toto = getimagesize($folder . "/" . $file);
                 $tata = array_merge($tab, $toto);
-//                print_r($tata);
-                $lol =get_png($tata,$folder, $handle, $file, $toto, $tab);
+                get_png($sprite, $tata, $folder, $handle, $file, $toto, $tab);
             }
         }
+        imagepng($sprite, 'image_3.png');
     }
 }
 
 read_files($argv[1]);
 
 
-function get_png($tata, $folder, $file, $tab){
+function get_png(&$sprite, $tata, $folder, $file, $tab, $toto, $handle){
 
-$kiki = $folder ."/" .$tab;
-//    var_dump($kiki);
+    static $largerX = 0;
+    $kiki = $folder . "/" . $tab;
 
-//    print_r($tata);
 
-    $test=imagecreatetruecolor(2308, 1899);
     $image_1 = imagecreatefrompng($kiki);
-//    $image_2 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
-//
-    imagealphablending($test, true);
-    imagesavealpha($test, true);
-    imagecopy($test, $image_1, 0, 0, 0, 0, 1473, 1854);
-    imagecopy($test, $image_1, 1474, 0, 0, 0, 1000, 1000);
-    imagepng($test, 'image_3.png');
 
-//
+    imagecopy($sprite, $image_1, $largerX, 0, 0, 0, $toto[0], $toto[1]);
+    $largerX += $toto[0];
 }
+
+function 
