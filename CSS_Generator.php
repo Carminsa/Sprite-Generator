@@ -12,8 +12,8 @@ function read_files($folder){
                 $tab = explode("\n", $file);
                 $toto = (list($width, $height) = getimagesize($folder . "/" . $file));
                 $tata = array_merge($tab, $toto);
-                print_r($tata);
-                $lol=get_png($tata,$folder, $handle);
+//                print_r($tata);
+                $lol =get_png($tata,$folder, $handle, $file, $toto, $tab);
             }
         }
     }
@@ -22,16 +22,22 @@ function read_files($folder){
 read_files($argv[1]);
 
 
-function get_png($folder, $tata, $handle ){
-    
-    $test=imagecreatetruecolor(2308, 1899);
-    $image_1 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/Small-mario.png');
-    $image_2 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
+function get_png($tata, $folder, $file, $tab){
 
+$kiki = $folder ."/" .$tab;
+//    var_dump($kiki);
+
+//    print_r($tata);
+
+    $test=imagecreatetruecolor(2308, 1899);
+    $image_1 = imagecreatefrompng($kiki);
+//    $image_2 = imagecreatefrompng('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/20160509_profilpic_NS.png');
+//
     imagealphablending($test, true);
     imagesavealpha($test, true);
     imagecopy($test, $image_1, 0, 0, 0, 0, 1473, 1854);
-    imagecopy($test, $image_2, 1474, 0, 0, 0, 1000, 1000);
+    imagecopy($test, $image_1, 1474, 0, 0, 0, 1000, 1000);
     imagepng($test, 'image_3.png');
 
+//
 }
