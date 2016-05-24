@@ -5,6 +5,7 @@ function read_files($folder){
 
     if ($handle = opendir($folder)) {
         $sprite = imagecreatetruecolor(3500, 1899);
+        $sprite=imagecolorallocatealpha($lol, 0,0,0, 127);
 
         while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;

@@ -12,27 +12,19 @@ function read_files($folder, &$tab){
             }
             if (strrpos($file, '.png') > -1) {
                 array_push($tab, $folder . "/" . $file);
-                //              $tab = getimagesize($folder . "/" . $file);
-                //            var_dump($tab);
+  //              $tab = getimagesize($folder . "/" . $file);
+    //            var_dump($tab);
                 //sprite($sprite, $tab, $folder, $file);
             }
         }
     }
     //imagepng($sprite, 'image_3.png');
 }
-
-
 $tabFiles = array();
 if(is_dir($argv[1]))
     read_files($argv[1], $tabFiles);
 for ($i = 0; $i < count($tabFiles); $i++)
-    echo getimagesize($tabFiles[$i])[1] . "\n";
-
-
-
-
-
-
+    echo $tabFiles[$i] . "\n";
 
 function sprite(&$sprite, $tab, $folder, $file){
 
@@ -43,5 +35,21 @@ function sprite(&$sprite, $tab, $folder, $file){
 
     imagecopy($sprite, $image_1, $largerX, 0, 0, 0, $tab[0], $tab[1]);
     $largerX += $tab[0];
+    
+}
+
+
+
+
+
+
+
+//        static $largerX = 0;
+//    $zizi=imagecreatefrompng($tabFiles[$i]);
+//    $sprite = imagecreatetruecolor(3500, 1899);
+//    imagecopy($sprite, $zizi,$largerX, 0, 0, 0, 1786, 1400);
+//    imagepng($sprite, 'image_3.png');
 
 }
+
+
