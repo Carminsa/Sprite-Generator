@@ -16,32 +16,34 @@ function read_files($folder, &$tab, &$path)
         }
     }
 }
-function getSizeOfSprite($tab, $path) {
+function getSizeOfSprite($tab) {
     $totalLargeur = 0;
     $maxHauteur = [];
 
     for ($i = 0; $i < count($tab); $i++) {
         $tmp = getimagesize($tab[$i]);
-        $largeur = $tmp[0];
+//        $largeur = $tmp[0];
         $totalLargeur += $tmp[0];
-        array_push($maxHauteur, $tmp[1]);
-        $hauteur= end($maxHauteur);
+//        array_push($maxHauteur, $tmp[1]);
+        var_dump($totalLargeur);
+//        $hauteur= end($maxHauteur);
     }
     $maxHauteurValue = max($maxHauteur);
     $sprite = imagecreatetruecolor($totalLargeur, $maxHauteurValue);
 
 
-    create_sprite($totalLargeur, $hauteur, $tab, $sprite, $largeur);
+    create_sprite($totalLargeur, $hauteur, $tab, $sprite /*,$largeur*/);
 }
 
 
-function create_sprite(&$totalLargeur, &$hauteur, &$tab, &$sprite, &$largeur){
+function create_sprite(&$totalLargeur, /*&$hauteur, */&$tab, &$sprite, &$largeur){
 
     static $largerX = 0;
 
+
     foreach ($tab as $value){
         $png = imagecreatefrompng($value);
-        imagecopy($sprite, $png, $largerX, 0, 0, 0, $totalLargeur, $hauteur);
+        imagecopy($sprite, $png, $largerX, 0, 0, 0, $totalLargeur, 0);
         $largerX += $largeur;
     }
     imagepng($sprite, 'image_3.png');
@@ -49,7 +51,7 @@ function create_sprite(&$totalLargeur, &$hauteur, &$tab, &$sprite, &$largeur){
 
 $tab = array();
 read_files($argv[1], $tab, $path);
-getSizeOfSprite($tab, $path);
+getSizeOfSprite($tab);
 
 
 
