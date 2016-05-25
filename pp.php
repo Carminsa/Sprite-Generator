@@ -31,17 +31,17 @@ function getSizeOfSprite($tab) {
 }
 
 
-function create_sprite(&$tab, &$sprite, &$tmp){
+function create_sprite(&$tab, &$sprite, $tmp){
 
     static $largerX = 0;
 
-        foreach ($tab as $value) {
-            $png = imagecreatefrompng($value);
-            $tmp = getimagesize($value);
-            imagecopy($sprite, $png, $largerX, 0, 0, 0, $tmp[0], $tmp[1]);
-            $largerX += $tmp[0];
-        }
-        imagepng($sprite, 'image_3.png');
+    foreach ($tab as $value) {
+        $png = imagecreatefrompng($value);
+        $tmp = getimagesize($value);
+        imagecopy($sprite, $png, $largerX, 0, 0, 0, $tmp[0], $tmp[1]);
+        $largerX += $tmp[0];
+    }
+    imagepng($sprite, 'image_3.png');
 }
 
 $tab = array();
