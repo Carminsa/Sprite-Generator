@@ -1,54 +1,55 @@
 <?php
 
-
-function read_files($folder, &$tab)
+function read_files($folder, &$tab, &$path)
 {
     if ($handle = opendir($folder)) {
 
         while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;
             if (is_dir($folder . "/" . $file)) {
-                read_files($folder . "/" . $file, $tab);
+                read_files($folder . "/" . $file, $tab ,$png);
             }
-            if (strrpos($file, '.png') > -1) {
+            else if (strrpos($file, '.png') > -1) {
                 array_push($tab, $folder . "/" . $file);
+                $path = ($folder ."/" .$file);
             }
         }
     }
 }
+function getSizeOfSprite($tab, $path) {
+    $totalLargeur = 0;
+    $maxHauteur = [];
 
-$tabFiles = array();
-$tab_vide=array();
-$tab_empty_height=array();
-
-if(is_dir($argv[1])) {
-    read_files($argv[1], $tabFiles);
-    for ($i = 0; $i < count($tabFiles); $i++) {
-        $stockage = (getimagesize($tabFiles[$i]));
-        $tab_vide[$i] = $stockage[0];
+    for ($i = 0; $i < count($tab); $i++) {
+        $tmp = getimagesize($tab[$i]);
+        $largeur = $tmp[0];
+        $totalLargeur += $tmp[0];
+        array_push($maxHauteur, $tmp[1]);
+        $hauteur= end($maxHauteur);
     }
-    $width=$tab_vide[0];
-//    echo $width;
+    $maxHauteurValue = max($maxHauteur);
+    $sprite = imagecreatetruecolor($totalLargeur, $maxHauteurValue);
 
-    for($j = 0; $j < count($tabFiles); $j++){
-        $stockage= (getimagesize($tabFiles[$j]));
-        $tab_empty_height[$j] = $stockage[1];
-    }
-    $height=$tab_empty_height[0];
-//    echo $height;
 
-foreach ($tabFiles as $value){
-    echo $value ."\n";
+    create_sprite($totalLargeur, $hauteur, $tab, $sprite, $largeur);
 }
 
 
+function create_sprite(&$totalLargeur, &$hauteur, &$tab, &$sprite, &$largeur){
 
-   $sprite = imagecreatetruecolor(3500, 1899);
-  $image_1 = imagecreatefrompng($value);
-        imagecopy($sprite, $image_1, $largerX, 0, 0, 0, $x, $toto[1]);
+    static $largerX = 0;
 
+    foreach ($tab as $value){
+        $png = imagecreatefrompng($value);
+        imagecopy($sprite, $png, $largerX, 0, 0, 0, $totalLargeur, $hauteur);
+        $largerX += $largeur;
+    }
+    imagepng($sprite, 'image_3.png');
 }
 
+$tab = array();
+read_files($argv[1], $tab, $path);
+getSizeOfSprite($tab, $path);
 
 
 
@@ -57,37 +58,62 @@ foreach ($tabFiles as $value){
 
 
 
-//foreach ($tabFiles as $keys => $values) {
-////    foreach ($values as $key => $value) {
-//        print($key . "\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//function sprite(&$sprite, $argv=null){
+//
+//    $tabFiles = array();
+//    $tab_vide = array();
+//    $tab_empty_height = array();
+//
+//    if (is_dir($argv[1])) {
+//        read_files($argv[1], $tabFiles);
+//        for ($i = 0; $i < count($tabFiles); $i++) {
+//            $stockage = getimagesize($tabFiles[$i]);
+//            $tab_vide[$i] = $stockage[0];
+//
+//        }
+//        $width = $tab_vide[0];
+//
+//        for ($j = 0; $j < count($tabFiles); $j++) {
+//            $stockage = (getimagesize($tabFiles[$j]));
+//            $tab_empty_height[$j] = $stockage[1];
+//        }
+//        $height = $tab_empty_height[0];
+//
+//        foreach ($tabFiles as $value) {
+//            static $largerX = 0;
+//            $image_1 = imagecreatefrompng($value);
+//            imagecopy($sprite, $image_1, $largerX, 0, 0, 0, $width, $height);
+//            $largerX += $width[0];
+//        }
+//
 //    }
-
-
-
-
-
-
-
-
-//        $l = list($tabFiles[$i][0], $tabFiles[$i][1]) = getimagesize('/home/leborg_g/Semestre 1/PHP_CSS_Generator/assets_folder/HP_logo_630x630.png');
-//        print_r($l);
-
-
-//        foreach ($tabFiles as $key => $tabFile) {
-//          $tabFiles[$key]=0;
-//            $Y =($tabFiles[1]= getimagesize($folder ."/" .$tabFile[$i])[0]);
-//    }
-
-
-
-//        $largeur=(getimagesize($tabFiles[$i])[0]);
-//        $hauteur=(getimagesize($tabFiles[$i])[1]) ."\n";
-
-
-
-//        print_r(getimagesize($tabFiles[$i]));
-
-
-
-
-//        print_r(getimagesize($tabFiles[$i])). "\n";
+//}
+//
+//
