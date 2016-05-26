@@ -16,6 +16,7 @@ function read_files($folder, &$tab)
     }
 }
 function getSizeOfSprite($tab) {
+
     $totalLargeur = 0;
     $maxHauteur = [];
 
@@ -26,6 +27,11 @@ function getSizeOfSprite($tab) {
     }
     $maxHauteurValue = max($maxHauteur);
     $sprite = imagecreatetruecolor($totalLargeur, $maxHauteurValue);
+    imagealphablending($sprite, false);
+    $col=imagecolorallocatealpha($sprite,255,255,255,127);
+    imagefilledrectangle($sprite,0,0,$totalLargeur, $totalLargeur,$col);
+    imagealphablending($sprite,true);
+
 
     create_sprite($tab, $sprite, $tmp);
 }
