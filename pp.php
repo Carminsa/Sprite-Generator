@@ -1,4 +1,6 @@
+
 <?php
+
 
 function read_files($folder, &$tab)
 {
@@ -33,11 +35,11 @@ function getSizeOfSprite($tab) {
     imagealphablending($sprite,true);
 
 
-    create_sprite($tab, $sprite, $tmp);
+    create_sprite($tab, $sprite);
 }
 
 
-function create_sprite(&$tab, &$sprite, $tmp){
+function create_sprite(&$tab, &$sprite){
 
     static $largerX = 0;
 
