@@ -51,6 +51,44 @@ function create_sprite(&$tab, &$sprite){
     imagepng($sprite, 'image_3.png');
 }
 
+
+function create_css(&$tab){
+    $all_values=[];
+
+    foreach ($tab as $value) {
+        $tmp = getimagesize($value);
+        array_push($all_values, $tmp);
+    }
+
+//  print_r($all_values);
+    for($i=0; $i < count($all_values); $i++){
+//            $premier = $all_values[$i];
+//        var_dump($premier);
+
+//    static $lol = 0;
+
+        $hauteur = 'IMG 1{' . "\n"
+            ."width :".$all_values[$i][0]." px; \n"
+            ."height :". $all_values[$i][1] . " px; \n";
+//        $lol += $hauteur;
+        var_dump($hauteur);
+
+        file_put_contents('stylesheet.css', $hauteur, FILE_APPEND);
+    }
+}
+
+
+
+
+
+
+
+
+
 $tab = array();
 read_files($argv[1], $tab);
 getSizeOfSprite($tab);
+
+create_css($tab);
+
+
