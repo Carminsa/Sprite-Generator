@@ -52,33 +52,41 @@ function create_sprite(&$tab, &$sprite){
 }
 
 
-function create_css(&$tab){
-    $all_values=[];
+function create_css(&$tab)
+{
+    if (!file_exists('stylesheet.css')) {
+        $all_values = [];
+//    $name=[];
 
-    foreach ($tab as $value) {
-        $tmp = getimagesize($value);
-        array_push($all_values, $tmp);
-    }
+        foreach ($tab as $value) {
+            $tmp = getimagesize($value);
+            array_push($all_values, $tmp);
+        }
+
+        for ($i = 0; $i < count($tab); $i++) {
+//    $name=$tab[0];
+//    $implode = implode("\n", $name);
+//        array_push($name,$tab[$i]);
+        }
+//        var_dump($name);
 
 //  print_r($all_values);
-    for($i=0; $i < count($all_values); $i++){
-//            $premier = $all_values[$i];
+        for ($i = 0; $i < count($all_values); $i++) {
+//        $premier = $all_values[$i];
 //        var_dump($premier);
 
-//    static $lol = 0;
+            static $lol = 1;
 
-        $hauteur = 'IMG 1{' . "\n"
-            ."width :".$all_values[$i][0]." px; \n"
-            ."height :". $all_values[$i][1] . " px; \n";
-//        $lol += $hauteur;
-        var_dump($hauteur);
+            $hauteur = "#image" . $lol . " { \n"
+                . "width :" . $all_values[$i][0] . " px; \n"
+                . "height :" . $all_values[$i][1] . " px; \n" . "\n";
+            $lol++;
+//        var_dump($hauteur);
 
-        file_put_contents('stylesheet.css', $hauteur, FILE_APPEND);
+            file_put_contents('stylesheet.css', $hauteur, FILE_APPEND);
+        }
     }
 }
-
-
-
 
 
 
