@@ -1,17 +1,19 @@
+else if (mime_content_type($folder ."/" .$file)== 'image/png') {
+
+
 <?php
 
-function read_files($folder, &$tab, &$path)
+function read_files($folder, &$tab)
 {
     if ($handle = opendir($folder)) {
 
         while (false !== ($file = readdir($handle))) {
             if ($file == '.' || $file == '..') continue;
             if (is_dir($folder . "/" . $file)) {
-                read_files($folder . "/" . $file, $tab ,$png);
+                read_files($folder . "/" . $file, $tab);
             }
             else if (strrpos($file, '.png') > -1) {
                 array_push($tab, $folder . "/" . $file);
-                $path = ($folder ."/" .$file);
             }
         }
     }
@@ -50,7 +52,7 @@ function create_sprite(&$totalLargeur, /*&$hauteur, */&$tab, &$sprite, &$largeur
 }
 
 $tab = array();
-read_files($argv[1], $tab, $path);
+read_files($argv[1], $tab);
 getSizeOfSprite($tab);
 
 

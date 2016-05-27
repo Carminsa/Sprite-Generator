@@ -1,16 +1,10 @@
-#image1 { 
-width :586 px; 
-height :387 px; 
-
-#image2 { 
-width :586 px; 
-height :387 px; 
-
-#image3 { 
-width :450 px; 
-height :450 px; 
-
-#image4 { 
-width :400 px; 
-height :479 px; 
-
+#image1{ 
+width :586px; 
+height :387px; 
+} 
+ 
+#image2{ 
+width :400px; 
+height :479px; 
+} 
+ 
