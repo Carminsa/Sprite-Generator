@@ -1,18 +1,28 @@
 <?php
 
-function get_arg($argv, &$tab){
-    $pos_option = "";
-    $pos_folder = "";
+function get_arg($argv){
 
-    for ($i = 0; $i < count($argv); $i++) {
-        if ($argv[$i] =='-r') {
-            $pos_option = '-r';
+    $option=array("i","r","s","p","o","c","no_dash");
+    $option["i"]="";
+    $option["r"]="";
+    $option["s"]="";
+    $option["p"]="";
+    $option["o"]="";
+    $option["c"]="";
+
+    for($i=1;$i<count($argv);$i++){
+        if($argv[$i]== "-r") {
+            $option["-r"] = "-r";
         }
-        else if (is_dir($argv[$i])){
-            $pos_folder = $i;
+        else if($argv[$i]=="i"){
+            $option [$i]=substr($argv[$i],3);
+
+        }
+        elseif(is_dir($argv[$i])){
+            $option["no_dash"]=$argv[$i];
         }
     }
-    read_files($argv[$pos_folder], $tab, $pos_option);
+    return $option;
 }
 
 
@@ -93,9 +103,9 @@ function create_css(&$tab){
 }
 
 
-$tab = array();
-//read_files($argv[1], $tab);
-get_arg($argv, $tab);
+//$tab = array();
+$tab=get_arg($argv);
+read_files($tab["no_dash"], $tab,$tab["r"]);
 getSizeOfSprite($tab);
 create_css($tab);
 
