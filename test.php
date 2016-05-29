@@ -88,6 +88,43 @@ echo $whatIWant;
 //
 //
 //
+function output_image(&$argv, $tab)
+{
+
+    if (!file_exists('sprite.png')) {
+        echo "test1";
+        getSizeOfSprite($tab);
+    }
+
+
+    for ($i = 0; $i < count($argv); $i++) {
+        $input = substr(strstr($argv[$i], "="), 1);
+        $input = strtolower($input);
+        if ($input == true) {
+            var_dump($input);
+        }
+
+        $substring = substr($argv[$i], 0, strpos($argv[$i], '='));
+        if ($substring == '-i' || $substring == '--output-image') {
+            echo "test2";
+
+            if (!file_exists('sprite.png') || empty($input)) {
+                echo "test3";
+                getSizeOfSprite($tab);
+
+            } else if (file_exists('sprite.png')) {
+                echo "test4";
+                rename("sprite.png", $input . ".png");
+            }
+        }
+//    }
+
+//    if (file_exists('style.css')) {
+//        echo "test5";
+//        getSizeOfSprite($tab);
+//    }
+    }
+}
 //
 //
 //

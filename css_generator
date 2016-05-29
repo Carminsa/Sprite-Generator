@@ -102,4 +102,4 @@ $tab = array();
 get_arg($argv, $tab);
 getSizeOfSprite($tab);
 output_style($argv,$tab,$input);
-output_image($argv,$input);
+output_image($argv, $tab, $folder, $pos_option);
