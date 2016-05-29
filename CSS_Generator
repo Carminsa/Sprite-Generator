@@ -9,8 +9,6 @@ function get_arg($argv, &$tab){
     for ($i = 0; $i < count($argv); $i++) {
         if ($argv[$i] =='-r'|| $argv[$i] == "--recursive") {
             $pos_option = '-r';
-//            var_dump($pos_option);
-//            die;
         }
         else if (is_dir($argv[$i])){
             $pos_folder = $i;
@@ -104,6 +102,6 @@ function create_css(&$tab){
 
 $tab = array();
 get_arg($argv, $tab);
-create_css($tab);
-output_image($argv, $tab, $whatIWant);
+//create_css($tab);
 getSizeOfSprite($tab);
+output_image($argv,$tab,$input);
