@@ -46,8 +46,4 @@ function output_image($argv, &$tab, &$folder, &$pos_option){
     }
 }
 
-
-
-
-
-
+?>
