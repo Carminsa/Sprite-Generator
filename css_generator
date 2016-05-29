@@ -37,19 +37,19 @@ function read_files($folder, &$tab,$pos_option)
 }
 function getSizeOfSprite($tab) {
 
-    $totalLargeur = 0;
-    $maxHauteur = [];
+    $total_height = 0;
+    $maxHeight = [];
 
     for ($i = 0; $i < count($tab); $i++) {
         $tmp = getimagesize($tab[$i]);
-        $totalLargeur += $tmp[0];
-        array_push($maxHauteur, $tmp[1]);
+        $total_height += $tmp[0];
+        array_push($maxHeight, $tmp[1]);
     }
-    $maxHauteurValue = max($maxHauteur);
-    $sprite = imagecreatetruecolor($totalLargeur, $maxHauteurValue);
+    $maxHauteurValue = max($maxHeight);
+    $sprite = imagecreatetruecolor($total_height, $maxHauteurValue);
     imagealphablending($sprite, false);
     $col=imagecolorallocatealpha($sprite,255,255,255,127);
-    imagefilledrectangle($sprite,0,0,$totalLargeur, $totalLargeur,$col);
+    imagefilledrectangle($sprite,0,0,$total_height, $total_height,$col);
     imagealphablending($sprite,true);
 
 
@@ -82,13 +82,13 @@ function create_css(&$tab){
             $path =str_replace(".","_" ,$path );
 
             static $back_pos = 0;
-            $hauteur = "#" .$path. "{\n"."width :".$all_values[$i][0]."px;\n"
+            $height = "#" .$path. "{\n"."width :".$all_values[$i][0]."px;\n"
                ."height :".$all_values[$i][1]."px;\n"."display:inline-block;\n"
                 ."background-repeat: no-repeat; \n"
                 ."background-position: -" .$back_pos ." 0px; \n"
                 ."background-image: url('sprite.png');" ."\n}" ."\n \n" ;
             $back_pos += $all_values[$i][0];
-            file_put_contents('style.css', $hauteur, FILE_APPEND);
+            file_put_contents('style.css', $height, FILE_APPEND);
         }
     }
     else if(file_exists('style.css')){

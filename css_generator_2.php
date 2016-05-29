@@ -11,7 +11,6 @@ function output_style(&$argv, &$tab, &$input=null){
         }
         $substring = substr($argv[$i], 0, strpos($argv[$i], '='));
         if($substring == '-s'|| $substring == '--output-style'){
-
             if (!file_exists('style.css') || empty($input)) {
                 create_css($tab);
             }
@@ -25,9 +24,7 @@ function output_style(&$argv, &$tab, &$input=null){
     }
 }
 
-
-function output_image($argv, &$tab, &$folder, &$pos_option)
-{
+function output_image($argv, &$tab, &$folder, &$pos_option){
 
     for ($i = 0; $i < count($argv); $i++) {
         $input = substr(strstr($argv[$i], "="), 1);
@@ -40,11 +37,6 @@ function output_image($argv, &$tab, &$folder, &$pos_option)
                 if(file_exists('sprite.png')){
                     rename('sprite.png', $input .".png");
                 }
-
-//                else {
-//                    echo "test2";
-//                    getSizeOfSprite($tab);
-//                }
 
             }
         }
