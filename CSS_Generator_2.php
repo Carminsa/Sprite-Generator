@@ -4,16 +4,22 @@ function output_image(&$argv, &$tab, &$input=null){
 
 
     for ($i = 0; $i < count($argv); $i++) {
-        $input = substr(strstr($argv[$i],"=" ),1 );
+        $input = substr(strstr($argv[$i], "="), 1);
+        $input=strtolower($input);
         if ($input == true) {
+        }
 
+        $substring = substr($argv[$i], 0, strpos($argv[$i], '='));
+        if($substring == '-s'|| $substring == '--output-image'){
 
-            if(!file_exists('stylesheet.css')){
+            if (!file_exists('stylesheet.css') || !isset($input)) {
+                echo "test1";
                 create_css($tab);
 
-            }
-            else if(file_exists('stylesheet.css')){
-                rename("stylesheet.css", $input . ".css");
+            } else if (file_exists('stylesheet.css')) {
+                echo "test2";
+
+                rename("stylesheet.css",$input . ".css");
             }
         }
     }
@@ -23,6 +29,34 @@ function output_image(&$argv, &$tab, &$input=null){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        $substring = substr($argv[$i], 0, strpos($argv[$i], '='));
+//            var_dump($substring);
 
 
 
