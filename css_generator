@@ -73,9 +73,7 @@ function create_sprite(&$tab, &$sprite){
 
 function create_css(&$tab){
     $all_values = [];
-
     if (!file_exists('style.css')) {
-
         for ($i = 0; $i < count($tab); $i++) {
             $tmp = getimagesize($tab[$i]);
             array_push($all_values, $tmp);;
@@ -83,15 +81,12 @@ function create_css(&$tab){
             $path = end($path);
             $path =str_replace(".","_" ,$path );
 
-        static $back_pos = 0;
-            $hauteur = "#" . $path . "{ \n"
-                ."width :" . $all_values[$i][0] . "px; \n"
-                ."height :" . $all_values[$i][1] . "px; \n"
-                ."display:inline-block; \n"
+            static $back_pos = 0;
+            $hauteur = "#" .$path. "{\n"."width :".$all_values[$i][0]."px;\n"
+               ."height :".$all_values[$i][1]."px;\n"."display:inline-block;\n"
                 ."background-repeat: no-repeat; \n"
                 ."background-position: -" .$back_pos ." 0px; \n"
                 ."background-image: url('sprite.png');" ."\n}" ."\n \n" ;
-
             $back_pos += $all_values[$i][0];
             file_put_contents('style.css', $hauteur, FILE_APPEND);
         }
@@ -103,9 +98,8 @@ function create_css(&$tab){
 }
 
 
-
 $tab = array();
 get_arg($argv, $tab);
 getSizeOfSprite($tab);
 output_style($argv,$tab,$input);
-//output_image($argv,$input);
+output_image($argv,$input);
