@@ -1,0 +1,18 @@
+#Intel_logo_png{ 
+width :586px; 
+height :387px; 
+display:inline-block; 
+background-repeat: no-repeat; 
+background-position: -0 454px;
+background-image: url('sprite.png');
+}
+ 
+#ILTQq_png{ 
+width :400px; 
+height :479px; 
+display:inline-block; 
+background-repeat: no-repeat; 
+background-position: -586 0px; 
+background-image: url('sprite.png');
+}
+ 

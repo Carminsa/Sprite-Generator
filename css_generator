@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-include "CSS_Generator_2.php";
+include "css_generator_2.php";
 
 function get_arg($argv, &$tab){
     $pos_option = "";
@@ -72,23 +72,27 @@ function create_sprite(&$tab, &$sprite){
 
 
 function create_css(&$tab){
+    $all_values = [];
 
     if (!file_exists('style.css')) {
-        $all_values = [];
 
-        foreach ($tab as $value) {
-            $tmp = getimagesize($value);
-            array_push($all_values, $tmp);
-        }
-        for ($i = 0; $i < count($all_values); $i++) {
-            static $image_name = 1;
+        for ($i = 0; $i < count($tab); $i++) {
+            $tmp = getimagesize($tab[$i]);
+            array_push($all_values, $tmp);;
+            $path = explode("/", $tab[$i]);
+            $path = end($path);
+            $path =str_replace(".","_" ,$path );
 
-            $hauteur = "#image" . $image_name . "{ \n"
-                . "width :" . $all_values[$i][0] . "px; \n"
-                . "height :" . $all_values[$i][1] . "px; \n" . "} \n \n" ;
+        static $back_pos = 0;
+            $hauteur = "#" . $path . "{ \n"
+                ."width :" . $all_values[$i][0] . "px; \n"
+                ."height :" . $all_values[$i][1] . "px; \n"
+                ."display:inline-block; \n"
+                ."background-repeat: no-repeat; \n"
+                ."background-position: -" .$back_pos ." 0px; \n"
+                ."background-image: url('sprite.png');" ."\n}" ."\n \n" ;
 
-            $image_name++;
-
+            $back_pos += $all_values[$i][0];
             file_put_contents('style.css', $hauteur, FILE_APPEND);
         }
     }
@@ -102,6 +106,6 @@ function create_css(&$tab){
 
 $tab = array();
 get_arg($argv, $tab);
-//create_css($tab);
 getSizeOfSprite($tab);
-output_image($argv,$tab,$input);
+output_style($argv,$tab,$input);
+//output_image($argv,$input);

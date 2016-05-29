@@ -1,6 +1,6 @@
 <?php
 
-function output_image(&$argv, &$tab, &$input=null){
+function output_style(&$argv, &$tab, &$input=null){
 
     if(!file_exists('style.css')){
         create_css($tab);
@@ -8,12 +8,12 @@ function output_image(&$argv, &$tab, &$input=null){
 
     for ($i = 0; $i < count($argv); $i++) {
         $input = substr(strstr($argv[$i], "="), 1);
-        $input=strtolower($input);
+        $input = strtolower($input);
         if ($input == true) {
         }
 
         $substring = substr($argv[$i], 0, strpos($argv[$i], '='));
-        if($substring == '-s'|| $substring == '--output-image'){
+        if($substring == '-s'|| $substring == '--output-style'){
 
             if (!file_exists('style.css') || empty($input)) {
                 create_css($tab);
@@ -24,14 +24,26 @@ function output_image(&$argv, &$tab, &$input=null){
             }
         }
     }
+    if(file_exists('style.css')){
+        create_css($tab);
+    }
 }
 
 
+function output_image($argv,$input)
+{
+    for ($i = 0; $i < count($argv); $i++) {
+        $input = substr(strstr($argv[$i], "="), 1);
+        $input = strtolower($input);
+        if ($input == true) {
+            var_dump($input);
+        }
+        $substring = substr($argv[$i], 0, strpos($argv[$i], '='));
+        if ($substring == '-s' || $substring == '--output-style') {
 
-
-
-
-
+        }
+    }
+}
 
 
 

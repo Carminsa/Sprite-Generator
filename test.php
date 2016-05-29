@@ -2,16 +2,22 @@
 <?php
 
 
-//$data = "123_String";
-//$whatIWant = substr($data, strpos($data, "_") + 1);
-//echo $whatIWant;
+$data = "123 String";
+$whatIWant = substr($data, strpos($data, " ") + 1);
+echo $whatIWant;
+
+////
+//$string = 'output-image=';
+//$substring = substr($string, 0, strpos($string, '='));
+//echo $substring;
 
 
-$string = 'output-image=';
-$substring = substr($string, 0, strpos($string, '='));
-echo $substring;
+//$str = "red yellow blue";
+//$preg = preg_match("/\s+/", $str);
+//echo $preg;
 
-
+//$str = "ceci estuntest";
+//$str=substr($str, 1, strrpos($str, ' ')+1);
 
 //
 //$text = "Ligne 1\nLigne 2\nLigne 3";
