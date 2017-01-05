@@ -3,7 +3,7 @@ width :586px;
 height :387px;
 display:inline-block;
 background-repeat: no-repeat; 
-background-position: -1972 0px; 
+background-position: -0 0px; 
 background-image: url('sprite.png');
 }
  
@@ -12,7 +12,25 @@ width :400px;
 height :479px;
 display:inline-block;
 background-repeat: no-repeat; 
-background-position: -2558 0px; 
+background-position: -586 0px; 
+background-image: url('sprite.png');
+}
+ 
+#Intel_png{
+width :586px;
+height :387px;
+display:inline-block;
+background-repeat: no-repeat; 
+background-position: -986 0px; 
+background-image: url('sprite.png');
+}
+ 
+#Ubuntu_png{
+width :450px;
+height :450px;
+display:inline-block;
+background-repeat: no-repeat; 
+background-position: -1572 0px; 
 background-image: url('sprite.png');
 }
  
